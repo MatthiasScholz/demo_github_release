@@ -39,6 +39,7 @@ $(release_notes_file):
 	@echo "- [release notes]($(release_notes_file))" >> CHANGELOG.md
 
 release-finalize:
+	git add .
 	git commit -m ":pushpin: $(release_version)"
 	git branch releases/$(release_version)
 	# TODO Push changes
