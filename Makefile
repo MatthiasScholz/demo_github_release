@@ -18,10 +18,10 @@ version_terraform := `grep --recursive --include=\*.tf "required_version" ./exam
 version_tf_nomad := `grep --recursive --include=\*.tf "terraform-aws-nomad.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 version_tf_consul := `grep --recursive --include=\*.tf "terraform-aws-consul.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 
-dummy-release: release_notes_file release-finalize release-github
+dummy-release: release-notes release-commit release-github
 
 # NOTE Ensure existing files are not overwritten
-release_notes_file: $(release_notes_file)
+release-notes: $(release_notes_file)
 $(release_notes_file):
 	@echo "INFO :: Writting the Changelog: '$(release_notes_file)'"
 	release_date=$(today) \
@@ -40,7 +40,7 @@ $(release_notes_file):
 	@echo "" >> CHANGELOG.md
 	@echo "- [release notes]($(release_notes_file))" >> CHANGELOG.md
 
-release-finalize:
+release-commit:
 	git add .
 	git commit -m ":pushpin: $(release_version)"
 	git push origin main
