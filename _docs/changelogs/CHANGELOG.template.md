@@ -20,7 +20,7 @@
 
 ## Release Branch
 
-- [releases/{{ env "release_version" }}](https://github.com/MatthiasScholz/cos/tree/releases/{{ env "release_version" }})
+- [releases/{{ env "release_version" }}]({{ env "repository_url" }}/tree/releases/{{ env "release_version" }})
 
 ## Disclaimer
 

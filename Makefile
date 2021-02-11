@@ -6,6 +6,7 @@ release_version ?= v0.0.2
 fabio_file := fabio.nomad
 packer_file := version_dummy.json
 
+repository_url := https://github.com/MatthiasScholz/demo_github_release
 today := `date +'%Y.%m.%d'`
 release_notes_template := _docs/changelogs/CHANGELOG.template.md
 release_notes_file := _docs/changelogs/CHANGELOG.$(release_version).md
