@@ -1,6 +1,6 @@
 # NOTE Should be set when calling make
 token_github :=
-release_version ?= v0.0.2
+release_version ?= v0.0.3
 
 # Extracting version information from the repository
 fabio_file := fabio.nomad
