@@ -19,7 +19,7 @@ version_terraform := `grep --recursive --include=\*.tf "required_version" ./exam
 version_tf_nomad := `grep --recursive --include=\*.tf "terraform-aws-nomad.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 version_tf_consul := `grep --recursive --include=\*.tf "terraform-aws-consul.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 
-dummy-release: release-notes release-commit release-github
+dummy-release: release-notes release-commit release-github release-push
 
 # NOTE Ensure existing files are not overwritten
 release-notes: $(release_notes_file)
@@ -44,14 +44,16 @@ $(release_notes_file):
 release-commit:
 	git add .
 	git commit -m ":pushpin: $(release_version)"
-	git push origin main
-	git branch releases/$(release_version)
-	git push origin releases/$(release_version)
 
 release-github:
 	gh release list
 	gh release create $(release_version) --draft --prerelease --title $(release_title) --notes-file $(release_notes_file)
 	gh release list
+
+release-push:
+	git push origin main
+	git branch releases/$(release_version)
+	git push origin releases/$(release_version)
 
 gh-login:
 ifeq ($(strip $(token_github)),)
