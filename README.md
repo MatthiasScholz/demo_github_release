@@ -27,7 +27,7 @@ make gh-login token_github=<your_personal_github_token>
 1. Make the current stage of the repository a relaese. This will create a release branch (for GoCD) and create a draft for a github release.
 
 ```
-make relaese release_version=1.0.0
+make release release_version=1.0.0
 ```
 
 1. Check the draft release on [GitHub](https://github.com/MatthiasScholz/demo_github_release/releases) and publish it. 
