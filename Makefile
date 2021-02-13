@@ -19,7 +19,7 @@ version_terraform := `grep --recursive --include=\*.tf "required_version" ./exam
 version_tf_nomad := `grep --recursive --include=\*.tf "terraform-aws-nomad.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 version_tf_consul := `grep --recursive --include=\*.tf "terraform-aws-consul.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 
-relase: release-commit release-push release-github
+release: release-commit release-push release-github
 test-release: release-notes release-commit release-push release-github
 
 # NOTE Ensure existing files are not overwritten
