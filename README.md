@@ -15,7 +15,7 @@ make release release_version=1.0.0
 ### Create release notes
 
 ```
-make release-notes release_version=v1.0.0
+make release-notes release_version=v1.0.2
 ```
 
 Using a [template](_docs/changelogs/CHANGELOG.template.md) using [consul-template](https://github.com/hashicorp/consul-template).
@@ -23,7 +23,7 @@ Using a [template](_docs/changelogs/CHANGELOG.template.md) using [consul-templat
 
 ### Update the relase notes
 
-You can provide more context with editing [CHANGELOG.v1.0.0.md](_docs/changelogs/CHANGELOG.v1.0.0.md) with the changes you want to mention.
+You can provide more context with editing [CHANGELOG.v1.0.2.md](_docs/changelogs/CHANGELOG.v1.0.2.md) with the changes you want to mention.
 
 ### Login to Github
 
@@ -34,10 +34,11 @@ make gh-login token_github=<your_personal_github_token>
 ### Make the current stage of the repository a release
 
 ```
-make release release_version=1.0.0
+make release release_version=1.0.2
 ```
 
-This will create a release branch (for GoCD) and create a draft for a github release.
+This will create a release branch (for GoCD) and a draft for a github release.
+Furthermore it will include all local changes INCLUDING files not yet under version control!
 
 ### Publish the release draft
 
