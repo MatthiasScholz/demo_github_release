@@ -6,8 +6,8 @@ release_version ?= v0.0.6
 fabio_file := fabio.nomad
 packer_file := version_dummy.json
 
-repository_url := https://github.com/MatthiasScholz/demo_github_release
-today := `date +'%Y.%m.%d'`
+release_branch := releases/$(release_version)
+today := `date +'%Y-%m-%d'`
 release_notes_template := _docs/changelogs/CHANGELOG.template.md
 release_notes_file := _docs/changelogs/CHANGELOG.$(release_version).md
 release_title := "$(release_version) ($(today))"
@@ -19,7 +19,7 @@ version_terraform := `grep --recursive --include=\*.tf "required_version" ./exam
 version_tf_nomad := `grep --recursive --include=\*.tf "terraform-aws-nomad.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 version_tf_consul := `grep --recursive --include=\*.tf "terraform-aws-consul.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 
-dummy-release: release-notes release-commit release-github release-push
+dummy-release: release-notes release-commit release-push release-github
 
 # NOTE Ensure existing files are not overwritten
 release-notes: $(release_notes_file)
@@ -47,13 +47,13 @@ release-commit:
 
 release-github:
 	gh release list
-	gh release create $(release_version) --draft --prerelease --title $(release_title) --notes-file $(release_notes_file)
+	gh release create $(release_version) --draft --prerelease --title $(release_title) --notes-file $(release_notes_file) --target $(release_branch)
 	gh release list
 
 release-push:
 	git push origin main
-	git branch releases/$(release_version)
-	git push origin releases/$(release_version)
+	git branch $(release_branch)
+	git push origin $(release_branch)
 
 gh-login:
 ifeq ($(strip $(token_github)),)
