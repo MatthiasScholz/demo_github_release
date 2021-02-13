@@ -19,7 +19,8 @@ version_terraform := `grep --recursive --include=\*.tf "required_version" ./exam
 version_tf_nomad := `grep --recursive --include=\*.tf "terraform-aws-nomad.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 version_tf_consul := `grep --recursive --include=\*.tf "terraform-aws-consul.git" ./modules | sed -n "s/.*v\([0-9.]*\).*/\1/p" | uniq`
 
-dummy-release: release-notes release-commit release-push release-github
+relase: release-commit release-push release-github
+test-release: release-notes release-commit release-push release-github
 
 # NOTE Ensure existing files are not overwritten
 release-notes: $(release_notes_file)
@@ -63,3 +64,11 @@ endif
 	gh version
 	echo $(token_github) | gh auth login --with-token
 	gh auth status
+
+setup:
+	brew install consul-template
+	brew install gh
+
+uninstall:
+	brew uninstall consul-template
+	brew uninstall gh
