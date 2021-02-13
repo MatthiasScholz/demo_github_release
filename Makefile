@@ -43,17 +43,16 @@ $(release_notes_file):
 	@echo "- [release notes]($(release_notes_file))" >> CHANGELOG.md
 
 release-commit:
-	git add .
+	@git add .
 	git commit -m ":pushpin: $(release_version)"
 
 release-github:
-	gh release list
 	gh release create $(release_version) --draft --prerelease --title $(release_title) --notes-file $(release_notes_file) --target $(release_branch)
-	gh release list
+	@gh release list
 
 release-push:
 	git push origin main
-	git branch $(release_branch)
+	@git branch $(release_branch)
 	git push origin $(release_branch)
 
 gh-login:
@@ -61,13 +60,14 @@ ifeq ($(strip $(token_github)),)
 	@echo "ERROR :: No github token given. Please call 'make' like this: 'make token_github=<put_github_token>'"
 	@exit 1
 endif
-	gh version
 	echo $(token_github) | gh auth login --with-token
 	gh auth status
 
 setup:
 	brew install consul-template
 	brew install gh
+	consul-template -version
+	gh version
 
 uninstall:
 	brew uninstall consul-template
