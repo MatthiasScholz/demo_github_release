@@ -19,3 +19,7 @@
 ## v0.0.5 (2021.02.11)
 
 - [release notes](_docs/changelogs/CHANGELOG.v0.0.5.md)
+
+## v0.0.6 (2021.02.13)
+
+- [release notes](_docs/changelogs/CHANGELOG.v0.0.6.md)

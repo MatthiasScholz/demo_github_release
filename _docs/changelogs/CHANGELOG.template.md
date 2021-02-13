@@ -20,7 +20,7 @@
 
 ## Release Branch
 
-- [releases/{{ env "release_version" }}]({{ env "repository_url" }}/blob/releases/{{ env "release_version" }}/README.md)
+- releases/{{ env "release_version" }}
 
 ## Disclaimer
 
