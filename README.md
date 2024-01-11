@@ -1,6 +1,7 @@
 # GitHub Release Automation
 
 Automating the process to releases in the GitHub context:
+
 - providing release note templating
 - automatic version extraction examples
 - using `make` to control the process
@@ -12,6 +13,7 @@ make release release_version=1.0.0
 ```
 
 ## Workflow
+
 ### Create release notes
 
 ```
@@ -23,7 +25,8 @@ Using a [template](_docs/changelogs/CHANGELOG.template.md) using [consul-templat
 
 ### Update the relase notes
 
-You can provide more context with editing [CHANGELOG.v1.0.2.md](_docs/changelogs/CHANGELOG.v1.0.2.md) with the changes you want to mention.
+You can provide more context with editing [CHANGELOG.v1.0.2.md](_docs/changelogs/CHANGELOG.v1.0.2.md)
+with the changes you want to mention.
 
 ### Login to Github
 
@@ -38,14 +41,16 @@ make release release_version=1.0.2
 ```
 
 This will create a release branch (for GoCD) and a draft for a github release.
-Furthermore it will include all local changes INCLUDING files not yet under version control!
+Furthermore it will include all local changes
+INCLUDING files not yet under version control!
 
 ### Publish the release draft
 
-On [GitHub](https://github.com/MatthiasScholz/demo_github_release/releases) you will now find a draft of your release which you can then publish.
+On [GitHub](https://github.com/MatthiasScholz/demo_github_release/releases)
+you will now find a draft of your release which you can then publish.
 
-NOTE: If you would like to publish your release directly just remove `--draft` and `--prerelease` from the make target [release-github](Makefile).
-
+NOTE: If you would like to publish your release directly just
+remove `--draft` and `--prerelease` from the make target [release-github](Makefile).
 
 ## Setup
 
